@@ -33,7 +33,7 @@ if (isset($_SESSION['loggedInUser'])) {
                     // instructor menu
                     if ($_SESSION['isInstructor'] == '1') {
                         echo "<li><a href='../accounts_manage.php'> Accounts </a></li>";
-                        echo "<li><a href='#'> Labs </a></li>";
+                        echo "<li><a href='../labs_manage.php'> Labs </a></li>";
                         echo "<li><a href='#'> Results </a></li>";
                         echo "<li><a href='#'> Update Main Page </a></li>";
 

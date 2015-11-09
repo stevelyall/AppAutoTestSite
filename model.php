@@ -107,4 +107,76 @@ function modifyUser($user, $newPass)
     mysqli_close($connection);
 }
 
+// retrieves all labs
+function getLabs()
+{
+    $connection = connectToDb();
+    $query = "SELECT * FROM lab ORDER BY id";
+    $labs = mysqli_query($connection, $query);
+    return $labs;
+
+}
+
+function findLab($name)
+{
+    $connection = connectToDb();
+    $name = mysqli_real_escape_string($connection, $name);
+    $query = "SELECT * FROM lab WHERE name = '$name' LIMIT 1";
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+        echo "findLab {$name} failed";
+    }
+    if ($lab = mysqli_fetch_assoc($result)) {
+        return $lab;
+    } else {
+        return null;
+    }
+}
+
+
+function addLab($name, $desc)
+{
+    $connection = connectToDb();
+    $name = mysqli_real_escape_string($connection, $name);
+    // TODO duplicate?
+    // add new user
+    $query = "INSERT INTO lab (name, description)
+                VALUES ('$name', '$desc'); ";
+    $result = mysqli_query($connection, $query);
+
+    if (!$result) {
+        die("Adding lab failed");
+    }
+    mysqli_close($connection);
+}
+
+function deleteLab($name)
+{
+    $connection = connectToDb();
+    $name = mysqli_real_escape_string($connection, $name);
+
+    $query = "DELETE FROM lab WHERE name = '$name';";
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+        die("Deleting lab failed" . mysqli_error($connection));
+    }
+
+    mysqli_close($connection);
+}
+
+function modifyLab($name, $newname, $newdesc)
+{
+    $connection = connectToDb();
+    $name = mysqli_real_escape_string($connection, $name);
+    $newname = mysqli_real_escape_string($connection, $newname);
+
+    $query = "UPDATE lab SET name = '$newname', description = '$newdesc' WHERE name = '$name' LIMIT 1;";
+    var_dump($query);
+    $result = mysqli_query($connection, $query);
+
+    if (!$result) {
+        die("Updating lab failed" . mysqli_error($connection));
+    }
+    mysqli_close($connection);
+}
 ?>
