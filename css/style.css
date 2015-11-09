@@ -1,0 +1,13 @@
+th {
+    padding: 5px;
+}
+
+td {
+    padding: 5px;
+}
+
+.account-form {
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
