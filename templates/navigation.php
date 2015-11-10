@@ -35,7 +35,7 @@ if (isset($_SESSION['loggedInUser'])) {
                         echo "<li><a href='../accounts_manage.php'> Accounts </a></li>";
                         echo "<li><a href='../labs_manage.php'> Labs </a></li>";
                         echo "<li><a href='#'> Results </a></li>";
-                        echo "<li><a href='#'> Update Main Page </a></li>";
+                        echo "<li><a href='../settings.php'> Settings </a></li>";
 
 
                     } else {

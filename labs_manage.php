@@ -31,8 +31,6 @@ include_once("templates/page_head.php");
             <br>
 
             <?php
-            $connection = connectToDb();
-
             $result = getLabs();
             ?>
             <a href="lab_add.php"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Lab</a>

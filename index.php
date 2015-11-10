@@ -12,6 +12,12 @@ if (!isset($_SESSION['loggedInUser'])) {
 }
 ob_flush();
 
+// get main page text
+// TODO on login or on every index page load?
+$_SESSION['courseName'] = getConfigProperty('course_name');
+$_SESSION['welcome_title'] = getConfigProperty('welcome_title');
+$_SESSION['welcome_message'] = getConfigProperty('welcome_message');
+
 include_once("templates/page_head.php");
 ?>
 
@@ -23,10 +29,12 @@ include_once("templates/page_head.php");
 
     <content>
         <div class="container-fluid">
-            <h2>Main Page Content</h2>
+            <h2><?php echo $_SESSION['courseName'] ?></h2>
+
+            <h3><?php echo $_SESSION['welcome_title'] ?></h3>
             <br>
 
-            <p>content goes here</p>
+            <p><?php echo $_SESSION['welcome_message'] ?></p>
         </div>
     </content>
 

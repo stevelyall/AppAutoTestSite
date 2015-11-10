@@ -30,6 +30,24 @@ function connectToDb()
     return $connection;
 }
 
+function getConfigProperty($property)
+{
+    $connection = connectToDb();
+    $query = "SELECT value FROM config WHERE property = '$property'";
+    $result = mysqli_fetch_assoc(mysqli_query($connection, $query));
+    return $result['value'];
+}
+
+function setConfigProperty($property, $value)
+{
+    $connection = connectToDb();
+    $query = "UPDATE config SET value = '$value' where property = '$property';";
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+        die("Updating config failed" . mysqli_error($connection));
+    }
+    mysqli_close($connection);
+}
 
 // queries the database for all users
 function findAllUsers()
@@ -196,4 +214,5 @@ function modifyLab($name, $newname, $newdesc)
     }
     mysqli_close($connection);
 }
-?>
+
+?>;
