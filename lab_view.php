@@ -30,9 +30,8 @@ include_once("templates/page_head.php");
             <!--        todo upload-->
 
         <div>
-            <button type="button" id="upload_file_button"><span class="glyphicon glyphicon-open btn btn-info"
-                                                                data-toggle="modal"
-                                                                data-target="uploadFileModal"></span>Upload File
+            <button type="button" id="upload_file_button" class="btn btn-primary"
+                    data-toggle="modal" data-target="#uploadFileModal"><span class="glyphicon glyphicon-open"> Upload File
             </button>
         </div>
 
@@ -41,10 +40,14 @@ include_once("templates/page_head.php");
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Upload File</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Some text in the modal.</p>
+                        <form action="file_upload.php" method="post" enctype="multipart/form-data">
+                            Select Java file to upload
+                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <button type="submit" value="Upload File" name="submit">Upload</button>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

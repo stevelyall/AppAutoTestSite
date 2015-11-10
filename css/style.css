@@ -20,6 +20,7 @@ td {
     margin-top: 20px;
 }
 
-a > span {
-    margin: 0px 10px;
-}
+/* TODO margin on grid incons? */
+/*a > span {*/
+/*margin: 0px 10px;*/
+/*}*/

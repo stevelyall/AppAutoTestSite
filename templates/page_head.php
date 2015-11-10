@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="../css/theme.min.css">
     <!--Custom Styles-->
     <link href="../css/style.css" rel="stylesheet">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 </head>
 <body>
