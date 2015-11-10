@@ -1,0 +1,15 @@
+{
+  "name": "AppAutoTestSite",
+  "homepage": "https://github.com/stevelyall/AppAutoTestSite",
+  "authors": [
+    "Steve <stevenlyall@gmail.com>"
+  ],
+  "description": "",
+  "main": "page_head.php",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}
