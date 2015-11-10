@@ -17,7 +17,7 @@ ob_flush();
 
 include_once("templates/page_head.php");
 ?>
-<body>
+
 <div class="container">
     <?php
     include_once("templates/navigation.php");
@@ -30,8 +30,36 @@ include_once("templates/page_head.php");
             <!--        todo upload-->
 
         <div>
-            <a href="##"> <span class="glyphicon glyphicon-open"></span>Upload File</a>
+            <button type="button" id="upload_file_button"><span class="glyphicon glyphicon-open btn btn-info"
+                                                                data-toggle="modal"
+                                                                data-target="uploadFileModal"></span>Upload File
+            </button>
         </div>
+
+        <div id="uploadFileModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+                <!--                <h3 class="panel-title">Upload File</h3>-->
+                <!--                <form action="file_upload.php" method="post" enctype="multipart/form-data">-->
+                <!--                    Select file to upload:-->
+                <!--                    <input type="file" name="fileToUpload" id="fileToUpload">-->
+                <!--                    <button type="submit" value="Upload File" name="submit">-->
+                <!--                </form>-->
+            </div>
+        </div
+
         <!--        todo results-->
 
     </content>
@@ -39,17 +67,14 @@ include_once("templates/page_head.php");
 </div>
 <!-- /container -->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<?php include_once("templates/page_footer.php"); ?>
+
 <script>
     $(document).ready(function () {
         console.log('load');
-        $('#edit-lab-back-button').click(function () {
-            window.open('labs_manage.php', '_self');
+        $('#upload-file-button').click(function () {
+            // TODO toggle modal
         })
     })
+
 </script>
-</body>
-</html>

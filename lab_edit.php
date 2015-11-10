@@ -30,7 +30,7 @@ ob_flush();
 
 include_once("templates/page_head.php");
 ?>
-<body>
+
 <div class="container">
     <?php
     include_once("templates/navigation.php");
@@ -60,10 +60,8 @@ include_once("templates/page_head.php");
 </div>
 <!-- /container -->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<?php include_once("templates/page_footer.php"); ?>
+
 <script>
     $(document).ready(function () {
         console.log('load');
@@ -72,5 +70,3 @@ include_once("templates/page_head.php");
         })
     })
 </script>
-</body>
-</html>

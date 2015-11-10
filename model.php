@@ -216,4 +216,4 @@ function modifyLab($name, $newname, $newdesc)
     mysqli_close($connection);
 }
 
-?>;
+?>

@@ -18,7 +18,6 @@ include_once("templates/page_head.php");
 
 ?>
 
-<body>
 <div class="container">
     <?php
     require("templates/navigation.php");
@@ -43,7 +42,9 @@ include_once("templates/page_head.php");
                         <!--                        <th><a href="lab_view.php?id=-->
                         <?php //echo urlencode($row["id"]) ?><!--"> -->
                         <?php //echo htmlentities($row['name']) ?><!--</th></a>-->
-                        <th><?php echo htmlentities($row['name']) ?></th>
+                        <th>
+                            <a href="lab_view.php?id=<?php echo htmlentities($row['id']) ?>"><?php echo htmlentities($row['name']) ?></a>
+                        </th>
                         <td>
                             <!--                            TODO confirm deletion?-->
                             <a href='lab_delete.php?id=<?php echo urlencode($row["id"]) ?>'> <span
@@ -74,9 +75,4 @@ include_once("templates/page_head.php");
 </div>
 <!-- /container -->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+<?php include_once("templates/page_footer.php"); ?>
