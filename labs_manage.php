@@ -36,22 +36,27 @@ include_once("templates/page_head.php");
             $result = getLabs();
             ?>
             <a href="lab_add.php"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Lab</a>
-            <br>
-            <table class='table-striped table-hover'>
+            <table id="labs-table" class='table-striped table-hover'>
                 <?php
-                while ($row = mysqli_fetch_assoc($result)) { ?>
+                while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
                     <tr>
+                        <!--                        TODO view lab details?-->
+                        <!--                        <th><a href="lab_view.php?id=-->
+                        <?php //echo urlencode($row["id"]) ?><!--"> -->
+                        <?php //echo htmlentities($row['name']) ?><!--</th></a>-->
                         <th><?php echo htmlentities($row['name']) ?></th>
                         <td>
-                            <a href='lab_delete.php?name=<?php echo urlencode($row["name"]) ?>'> <span
+                            <!--                            TODO confirm deletion?-->
+                            <a href='lab_delete.php?id=<?php echo urlencode($row["id"]) ?>'> <span
                                     class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>
-                            <a href='lab_edit.php?name=<?php echo urlencode($row["name"]) ?>'> <span
+                            <a href='lab_edit.php?id=<?php echo urlencode($row["id"]) ?>'> <span
                                     class='glyphicon glyphicon-pencil' aria-hidden='true'></span> </a>
                         </td>
                     </tr>
 
                     <tr>
-                        <td><?php echo htmlentities($row['description']) ?></td>
+                        <td colspan="2"><?php echo htmlentities($row['description']) ?></td>
 
                     </tr>
                 <?php } ?>

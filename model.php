@@ -117,7 +117,7 @@ function getLabs()
 
 }
 
-function findLab($name)
+function getLabByName($name)
 {
     $connection = connectToDb();
     $name = mysqli_real_escape_string($connection, $name);
@@ -132,6 +132,23 @@ function findLab($name)
         return null;
     }
 }
+
+function getLabById($id)
+{
+    $connection = connectToDb();
+    $id = mysqli_real_escape_string($connection, $id);
+    $query = "SELECT * FROM lab WHERE id = '$id' LIMIT 1";
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+        echo "findLab {$id} failed";
+    }
+    if ($lab = mysqli_fetch_assoc($result)) {
+        return $lab;
+    } else {
+        return null;
+    }
+}
+
 
 
 function addLab($name, $desc)

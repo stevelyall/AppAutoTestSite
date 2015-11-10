@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $description = $_POST['inputLabDesc'];
     // check for duplicate lab
     // user with that name exists
-    if (findLab($name) != null) {
+    if (getLabByName($name) != null) {
         $msg = "Can't add lab, {$name} already exists.";
     } else {
         // add user
@@ -44,7 +44,7 @@ include_once("templates/page_head.php");
             <label for="inputLabName" class="sr-only">Username</label>
             <input type="text" name="inputLabName" class="form-control" placeholder="Lab Name" required autofocus>
             <label for="inputLabDesc" class="sr-only">Description</label>
-            <!-- TODO textarea-->
+            <!-- TODO textarea?-->
             <input type="text" name="inputLabDesc" class="form-control" placeholder="Description" required>
             <br>
             <button id="done-adding-button" class="btn btn-primary" type="button" name="done">Done</button>

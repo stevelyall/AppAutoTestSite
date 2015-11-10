@@ -11,3 +11,15 @@ td {
     margin-right: auto;
     margin-left: auto;
 }
+
+#accounts-table {
+    margin-top: 20px;
+}
+
+#labs-table {
+    margin-top: 20px;
+}
+
+a > span {
+    margin: 0px 10px;
+}

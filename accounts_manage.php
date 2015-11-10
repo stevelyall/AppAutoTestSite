@@ -36,8 +36,7 @@ include_once("templates/page_head.php");
             $result = findAllUsers();
             ?>
             <a href="account_add.php"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Users</a>
-            <br>
-            <table class='table-striped table-hover'>
+            <table id='accounts-table' class='table-striped table-hover'>
                 <tr>
                     <th>Username</th>
                     <th>Last Name</th>
