@@ -40,7 +40,28 @@ if (isset($_SESSION['loggedInUser'])) {
 
                     } else {
                         // student menu
-                        echo "<li><a href=''> Labs</a></li>";
+                        ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Labs <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <?php
+                                $labs = getLabs();
+                                while ($row = mysqli_fetch_assoc($labs)) {
+                                    ?>
+                                    <li>
+                                        <a href='lab_view.php?id=<?php echo htmlentities($row['id']) ?>'><?php echo $row['name'] ?></a>
+                                    </li>
+                                    <?php
+                                }
+                                //                        ?>
+
+
+                            </ul>
+                        </li>
+
+                        <?php
+                        // other menu items
                         echo "<li><a href=''> </a></li>";
                     }
 

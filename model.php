@@ -204,6 +204,7 @@ function modifyLab($name, $newname, $newdesc)
     $connection = connectToDb();
     $name = mysqli_real_escape_string($connection, $name);
     $newname = mysqli_real_escape_string($connection, $newname);
+    $newdesc = mysqli_real_escape_string($connection, $newdesc);
 
     $query = "UPDATE lab SET name = '$newname', description = '$newdesc' WHERE name = '$name' LIMIT 1;";
     var_dump($query);

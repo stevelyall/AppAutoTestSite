@@ -9,7 +9,13 @@ if (!isset($_SESSION['loggedInUser']) || $_SESSION['isInstructor'] != '1') {
     redirectTo("index.php");
 }
 
+// must pass lab id
+if (!isset($_GET['id'])) {
+    redirectTo('index.php');
+}
+
 $id = $_GET['id'];
+
 $currentLab = getLabById($id);
 if (isset($_POST['submit'])) {
     // form was submitted
@@ -39,12 +45,11 @@ include_once("templates/page_head.php");
             <label for="newLabName" class="sr-only">Name</label>
             <input type="text" name="newLabName" class="form-control" value="<?php echo $currentLab['name']; ?>"
                    placeholder="Name"
-                   autofocus required>
+                   autofocus>
             <label for="newLabDesc" class="sr-only">Description</label>
             <!-- TODO textarea-->
-            <input type="text" name="newLabDesc" class="form-control" value="<?php echo $currentLab['description'] ?>"
-                   placeholder="Description"
-                   required>
+            <textarea name="newLabDesc" class="form-control"> <?php echo $currentLab['description'] ?></textarea>
+
             <br>
             <button id="edit-lab-back-button" class="btn btn-primary" type="button" name="done">Back</button>
             <button class="btn btn-primary" type="submit" name="submit">Submit Changes</button>
