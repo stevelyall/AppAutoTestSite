@@ -43,7 +43,7 @@ include_once("templates/page_head.php");
                         <h4 class="modal-title">Upload File</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="file_upload.php" method="post" enctype="multipart/form-data">
+	                    <form action="file_upload.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
                             Select Java file to upload
                             <input type="file" name="fileToUpload" id="fileToUpload">
                             <button type="submit" value="Upload File" name="submit">Upload</button>
@@ -53,18 +53,11 @@ include_once("templates/page_head.php");
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
-                <!--                <h3 class="panel-title">Upload File</h3>-->
-                <!--                <form action="file_upload.php" method="post" enctype="multipart/form-data">-->
-                <!--                    Select file to upload:-->
-                <!--                    <input type="file" name="fileToUpload" id="fileToUpload">-->
-                <!--                    <button type="submit" value="Upload File" name="submit">-->
-                <!--                </form>-->
             </div>
         </div
 
         <!--        todo results-->
-
+	        <?php echo $uploadOk ?>
     </content>
 
 </div>

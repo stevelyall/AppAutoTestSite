@@ -9,11 +9,12 @@ function redirectTo($page)
 //returns a database connection
 function connectToDb()
 {
-//    production
+	// production
 //    $host = "localhost";
-//    $user = ""; // TODO production
-//    $pass = "";
-//    $dbname = "appautotestsite";
+//    $user = "appautotest";
+//    $pass = "mobileappstru";
+//    $dbname = "appautotest";
+//	$port = "3306";
 
     // dev
     $host = "127.0.0.1";
