@@ -6,30 +6,7 @@ function redirectTo($page)
     header("Location: " . $page);
 }
 
-//returns a database connection
-function connectToDb()
-{
-	// production
-//    $host = "localhost";
-//    $user = "appautotest";
-//    $pass = "mobileappstru";
-//    $dbname = "appautotest";
-//	$port = "3306";
-
-    // dev
-    $host = "127.0.0.1";
-    $user = "root";
-    $pass = "";
-    $dbname = "appautotest";
-    $port = "3306";
-
-    // connect to the database
-    $connection = mysqli_connect($host, $user, $pass, $dbname, $port);
-    if (mysqli_connect_errno()) {
-        die('Could not connect: ' . mysqli_connect_error() . ' error number: ' . mysqli_connect_errno() . '<br>');
-    }
-    return $connection;
-}
+require_once('database.php');
 
 function getConfigProperty($property)
 {
@@ -77,15 +54,17 @@ function findUser($username)
 }
 
 // adds a user to the database
-function addUser($username, $password)
+function addUser($username, $firstName, $lastName, $password)
 {
     $connection = connectToDb();
     $usr = mysqli_real_escape_string($connection, $username);
-    $pw = mysqli_real_escape_string($connection, $password);
+	$fn = mysqli_real_escape_string($connection, $firstName);
+	$ln = mysqli_real_escape_string($connection, $lastName);
+	$pw = mysqli_real_escape_string($connection, $password);
 
     // add new user
-    $query = "INSERT INTO user (username, password)
-                VALUES ('$usr', '$pw'); ";
+	$query = "INSERT INTO user (username, first_name, last_name, password)
+                VALUES ('$usr', '$fn', '$ln', '$pw'); ";
     $result = mysqli_query($connection, $query);
 
     if (!$result) {
