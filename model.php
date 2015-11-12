@@ -165,12 +165,12 @@ function addLab($name, $desc)
     mysqli_close($connection);
 }
 
-function deleteLab($name)
+function deleteLab($id)
 {
     $connection = connectToDb();
-    $name = mysqli_real_escape_string($connection, $name);
+	$id = mysqli_real_escape_string($connection, $id);
 
-    $query = "DELETE FROM lab WHERE name = '$name';";
+	$query = "DELETE FROM lab WHERE id = '$id';";
     $result = mysqli_query($connection, $query);
     if (!$result) {
         die("Deleting lab failed" . mysqli_error($connection));

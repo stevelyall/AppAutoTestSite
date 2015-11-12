@@ -11,7 +11,7 @@ if (!isset($_SESSION['loggedInUser']) || $_SESSION['isInstructor'] != '1') {
     redirectTo("index.php");
 }
 
-$lab = $_GET['name'];
+$lab = $_GET['id'];
 echo $lab;
 deleteLab($lab);
 
