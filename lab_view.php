@@ -5,21 +5,24 @@ require_once("model.php");
 
 session_start();
 
+
+// must pass lab id
+if (!isset($_GET['id'])) {
+	redirectTo('index.php');
+}
+
+$lab_id = $_GET['id'];
+
 // was submitted for file upload
 if (isset($_POST['submit']) && $_POST['command'] == 'upload') {
 	require_once("file_upload.php");
-	$uploadStatus = uploadFile(basename($_FILES["fileToUpload"]["name"])); // TODO pass user and lab to identify uploaded file?
+	$uploadStatus = uploadFile(basename($_FILES["fileToUpload"]["name"]), $lab_id, $_SESSION['loggedInUser']); // TODO pass user and lab to identify uploaded file?
 	$uploadWasSuccessful = $uploadStatus['success'];
 	$uploadMessage = $uploadStatus['message'];
 }
 
-// must pass lab id
-if (!isset($_GET['id'])) {
-    redirectTo('index.php');
-}
 
-$id = $_GET['id'];
-$currentLab = getLabById($id);
+$currentLab = getLabById($lab_id);
 
 ob_flush();
 
@@ -57,7 +60,8 @@ include_once("templates/page_head.php");
                     <div class="modal-body">
 	                    <b>Select a Java file to upload:</b>
 
-	                    <form action="lab_view.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
+	                    <form action="lab_view.php?id=<?php echo $lab_id ?>" method="post"
+	                          enctype="multipart/form-data">
 
 		                    <input type="hidden" name="command" value="upload">
 		                    <input type="file" name="fileToUpload" id="fileToUpload">
