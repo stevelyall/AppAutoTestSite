@@ -153,6 +153,7 @@ function addLab($name, $desc)
 {
     $connection = connectToDb();
     $name = mysqli_real_escape_string($connection, $name);
+	$desc = mysqli_real_escape_string($connection, $desc);
     $query = "INSERT INTO lab (name, description)
                 VALUES ('$name', '$desc'); ";
 	$result = mysqli_query($connection, $query);

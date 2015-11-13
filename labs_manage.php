@@ -29,6 +29,10 @@ include_once("templates/page_head.php");
             <h2>Manage Labs</h2>
             <br>
 
+	        <p>
+		        Click on a lab's name to see the student view for that lab. You may add, edit, or delete labs from this
+		        page.
+	        </p>
             <?php
             $result = getLabs();
             ?>
@@ -38,10 +42,6 @@ include_once("templates/page_head.php");
                 while ($row = mysqli_fetch_assoc($result)) {
                     ?>
                     <tr>
-                        <!--                        TODO view lab details?-->
-                        <!--                        <th><a href="lab_view.php?id=-->
-                        <?php //echo urlencode($row["id"]) ?><!--"> -->
-                        <?php //echo htmlentities($row['name']) ?><!--</th></a>-->
                         <th>
                             <a href="lab_view.php?id=<?php echo htmlentities($row['id']) ?>"><?php echo htmlentities($row['name']) ?></a>
                         </th>

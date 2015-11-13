@@ -9,7 +9,7 @@ session_start();
 if (isset($_POST['submit']) && $_POST['command'] == 'upload') {
 	require_once("file_upload.php");
 	$uploadStatus = uploadFile(basename($_FILES["fileToUpload"]["name"])); // TODO pass user and lab to identify uploaded file?
-	$uploadWasSuccessful = $uploadStatus['message'];
+	$uploadWasSuccessful = $uploadStatus['success'];
 	$uploadMessage = $uploadStatus['message'];
 }
 
@@ -26,16 +26,19 @@ ob_flush();
 include_once("templates/page_head.php");
 ?>
 
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
     <?php
     include_once("templates/navigation.php");
     ?>
 
     <content>
-        <h1><?php echo $currentLab['name'] ?></h1>
 
-        <p><?php echo $currentLab['description'] ?>
+
+	    <h1><?php echo $currentLab['name'] ?></h1>
+
+	    <p><?php echo $currentLab['description'] ?>
             <!--        todo upload-->
+
 
         <div>
             <button type="button" id="upload_file_button" class="btn btn-primary"
@@ -59,8 +62,7 @@ include_once("templates/page_head.php");
 		                    <input type="hidden" name="command" value="upload">
 		                    <input type="file" name="fileToUpload" id="fileToUpload">
 		                    <br>
-		                    <button type="submit" class="btn btn-primary" value="Upload File" name="submit">Upload
-		                    </button>
+		                    <input type="submit" class="btn btn-primary" value="Upload File" name="submit">
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -68,37 +70,21 @@ include_once("templates/page_head.php");
                     </div>
                 </div>
             </div>
-        </div
+        </div>
 
-        <!--        todo results-->
-	    <div id="uploadFileResultModal" class="modal fade" role="dialog">
-		    <div class="modal-dialog">
-			    <div class="modal-content">
-				    <div class="modal-header">
-					    <button type="button" class="close" data-dismiss="modal">&times;</button>
-					    <h4 class="modal-title">Upload File</h4>
-				    </div>
-				    <div class="modal-body">
-					    <b>Select a Java file to upload:</b>
 
-					    <form action="lab_view.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
+	    <!-- File upload result message-->
+	    <?php
+	    if (isset($uploadStatus)) {
+		    if ($uploadWasSuccessful) {
+			    echo "<div class='alert alert-success upload-result-alert' role='alert'>{$uploadMessage}</div>";
+		    } else {
+			    echo "<div class='alert alert-danger upload-result-alert' role='alert'>{$uploadMessage}</div>";
+		    }
+	    }
 
-						    <input type="hidden" name="command" value="upload">
-						    <input type="file" name="fileToUpload" id="fileToUpload">
-						    <br>
-						    <button type="submit" class="btn btn-primary" value="Upload File" name="submit">Upload
-						    </button>
-					    </form>
-				    </div>
-				    <div class="modal-footer">
-					    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-				    </div>
-			    </div>
-		    </div>
-	    </div
-
-	    <?php echo "Upload ok? " . $uploadOk
 	    ?>
+
     </content>
 
 </div>
@@ -108,10 +94,7 @@ include_once("templates/page_head.php");
 
 <script>
     $(document).ready(function () {
-        console.log('load');
-        $('#upload-file-button').click(function () {
-            // TODO toggle modal
-        })
+
     })
 
 </script>

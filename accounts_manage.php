@@ -29,6 +29,9 @@ include_once("templates/page_head.php");
             <h2>Manage Accounts</h2>
             <br>
 
+	        <p>
+		        You may add, delete or change passwords for user accounts here.
+	        </p>
             <?php
             $connection = connectToDb();
 
