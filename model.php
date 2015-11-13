@@ -153,14 +153,11 @@ function addLab($name, $desc)
 {
     $connection = connectToDb();
     $name = mysqli_real_escape_string($connection, $name);
-    // TODO duplicate?
-    // add new user
     $query = "INSERT INTO lab (name, description)
                 VALUES ('$name', '$desc'); ";
-    $result = mysqli_query($connection, $query);
-
+	$result = mysqli_query($connection, $query);
     if (!$result) {
-        die("Adding lab failed");
+	    die("Adding lab failed" . mysqli_error($connection));
     }
     mysqli_close($connection);
 }

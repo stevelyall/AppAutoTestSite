@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     $name = $_POST['inputLabName'];
     $description = $_POST['inputLabDesc'];
     // check for duplicate lab
-    // user with that name exists
+	// lab with that name exists
     if (getLabByName($name) != null) {
         $msg = "Can't add lab, {$name} already exists.";
     } else {
