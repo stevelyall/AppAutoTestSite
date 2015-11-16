@@ -99,7 +99,7 @@ include_once("templates/page_head.php");
 
 			    $testcase = getTestCaseDescriptionById($row['test_case_id']);
 			    $isPass = htmlentities($row['result']);
-			    // todo get result as bit? pass or fail text and colour accordingly?
+			    // todo what should be shown for instructor?
 			    ?>
 			    <tr>
 				    <th class="id">

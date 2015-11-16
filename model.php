@@ -124,6 +124,14 @@ function getResultsForLabAndUser($labid, $username)
 	return $results;
 }
 
+function getResultsForDownload()
+{
+	$connection = connectToDb();
+	$query = "SELECT lab.name, username, test_case_id, result FROM result JOIN lab ON result.lab_id = lab.id ORDER BY username";
+	$results = mysqli_query($connection, $query);
+	return $results;
+}
+
 function getTestCaseDescriptionById($testcaseid)
 {
 	$connection = connectToDb();
