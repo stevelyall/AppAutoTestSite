@@ -16,7 +16,7 @@ $lab_id = $_GET['id'];
 // was submitted for file upload
 if (isset($_POST['submit']) && $_POST['command'] == 'upload') {
 	require_once("file_upload.php");
-	$uploadStatus = uploadFile(basename($_FILES["fileToUpload"]["name"]), $lab_id, $_SESSION['loggedInUser']); // TODO pass user and lab to identify uploaded file?
+	$uploadStatus = uploadFile(basename($_FILES["fileToUpload"]["name"]), $lab_id, $_SESSION['loggedInUser']);
 	$uploadWasSuccessful = $uploadStatus['success'];
 	$uploadMessage = $uploadStatus['message'];
 }
@@ -40,8 +40,6 @@ include_once("templates/page_head.php");
 	    <h1><?php echo $currentLab['name'] ?></h1>
 
 	    <p><?php echo $currentLab['description'] ?>
-            <!--        todo upload-->
-
 
         <div>
             <button type="button" id="upload_file_button" class="btn btn-primary"
@@ -76,7 +74,6 @@ include_once("templates/page_head.php");
             </div>
         </div>
 
-
 	    <!-- File upload result message-->
 	    <?php
 	    if (isset($uploadStatus)) {
@@ -89,6 +86,52 @@ include_once("templates/page_head.php");
 
 	    ?>
 
+	    <?php
+	    $results = getResultsForLabAndUser($lab_id, $_SESSION['loggedInUser']);
+	    ?>
+
+	    <!--	    TODO create result records-->
+	    <!--	    TODO manage test cases?-->
+
+	    <table id="results-table" class='table'>
+		    <?php
+		    while ($row = mysqli_fetch_assoc($results)) {
+
+			    $testcase = getTestCaseDescriptionById($row['test_case_id']);
+			    $isPass = htmlentities($row['result']);
+			    // todo get result as bit? pass or fail text and colour accordingly?
+			    ?>
+			    <tr>
+				    <th class="id">
+					   Test Case Id
+				    </th>
+				    <th class="description">
+					    Description
+				    </th>
+				    <th class="result">
+					    Result
+				    </th>
+			    </tr>
+			    <?php
+			    if ($isPass) {
+					echo "<tr class='success'>";
+			    }
+			    else {
+			        echo "<tr class='danger'>";
+			    }
+			    ?>
+					<td class="id">
+					    <?php echo htmlentities($row['test_case_id']) ?>
+					</td>
+					<td class="description">
+					    <?php echo htmlentities($testcase['description']) ?>
+					</td>
+					<td class="result">
+					    <?php echo ($isPass)? "Pass" : "Fail" ?>
+					</td>
+			    </tr>
+		    <?php } ?>
+	    </table>
     </content>
 
 </div>

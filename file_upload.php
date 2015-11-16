@@ -7,8 +7,6 @@ function uploadFile($file, $lab_id, $username)
 	$target_dir = getConfigProperty('upload_directory');
 
 	// process file upload
-
-
 	$fileType = pathinfo($file, PATHINFO_EXTENSION);
 	if ($fileType != "java") {
 		return array('success' => false, 'message' => 'Not a Java File');
@@ -18,7 +16,7 @@ function uploadFile($file, $lab_id, $username)
 	$file = $username . "_" . $lab_id . "." . $fileType;
 	$target_file = $target_dir . $file;
 
-	echo $target_file;
+	//echo $target_file;
 
 	//if file already exists
 	if (file_exists($target_file)) {

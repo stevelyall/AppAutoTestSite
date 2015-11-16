@@ -115,6 +115,23 @@ function getLabs()
 
 }
 
+// retrieves lab results for user
+function getResultsForLabAndUser($labid, $username)
+{
+	$connection = connectToDb();
+	$query = "SELECT * FROM result WHERE lab_id=$labid AND username = '$username'";
+	$results = mysqli_query($connection, $query);
+	return $results;
+}
+
+function getTestCaseDescriptionById($testcaseid)
+{
+	$connection = connectToDb();
+	$query = "SELECT description FROM testcase WHERE test_case_id=$testcaseid";
+	$results = mysqli_query($connection, $query);
+	return mysqli_fetch_assoc($results);
+}
+
 function getLabByName($name)
 {
     $connection = connectToDb();
