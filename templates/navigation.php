@@ -62,7 +62,7 @@ if (isset($_SESSION['loggedInUser'])) {
 
                         <?php
                         // other menu items
-                        echo "<li><a href=''> </a></li>";
+	                    //echo "<li><a href=''> </a></li>";
                     }
 
                 }
