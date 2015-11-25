@@ -237,9 +237,6 @@ function addTestCasesForLab($labName, $testCasesArray)
 		$testCaseDescription = $testCasesArray[$i][($testCaseNumber . 'description')];
 		$testCaseDescription = mysqli_real_escape_string($connection, $testCaseDescription);
 
-		var_dump($testCaseName);
-		var_dump($testCaseDescription);
-
 		$query = "INSERT INTO testcase (lab_id, test_case_num, name, description) VALUES ('$labId', '$testCaseNumber', '$testCaseName', '$testCaseDescription');";
 		$result = mysqli_query($connection, $query);
 		if (!$result) {

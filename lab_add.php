@@ -22,8 +22,6 @@ if (isset($_POST['submit'])) {
 	    for ($i = 1; $i <= $_POST['numTestCases']; $i++) {
 		    array_push($testCases, array($i . 'name' => $_POST['testCase' . $i . 'Name'], $i . 'description' => $_POST['testCase' . $i . 'Description']));
 	    }
-	    // TODO remove debug
-	    var_dump($testCases);
 	    addLab($name, $description);
 	    addTestCasesForLab($name, $testCases);
         $msg = "{$name} added.";
