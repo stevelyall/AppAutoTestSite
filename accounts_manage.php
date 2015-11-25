@@ -68,10 +68,13 @@ include_once("templates/page_head.php");
                         if ($row['username'] == 'admin') {
                             continue;
                         }
-                        ?>
 
-                        <a href='account_delete.php?user=<?php echo urlencode($row["username"]) ?>'> <span
-                                class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>
+                        if ($row['username'] != $_SESSION['loggedInUser']) {
+                        ?>
+	                        <a href='account_delete.php?user=<?php echo urlencode($row["username"]) ?>'> <span
+			                        class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>
+                        <?php } ?>
+
                         <a href='account_change_password.php?user=<?php echo urlencode($row["username"]) ?>'> <span
                                 class='glyphicon glyphicon-pencil' aria-hidden='true'></span> </a>
                     </td>
