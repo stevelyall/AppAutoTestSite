@@ -25,6 +25,10 @@ td {
 	width: 80vw;
 }
 
+#results-table .num {
+	width: 5%;
+	text-align: center;
+}
 #results-table .id {
 	width: 15%;
 	text-align: center;

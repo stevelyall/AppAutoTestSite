@@ -111,7 +111,7 @@ include_once("templates/page_head.php");
 			    $num = $testCase['test_case_num'];
 			?>
 			    <tr>
-			        <td class=num"">
+				    <td class="num">
 				        <?php echo $num ?>
 				    </td>
 			        <td class="id">
@@ -120,23 +120,14 @@ include_once("templates/page_head.php");
 			        <td class="description">
 				        <?php echo htmlentities($testCase['description']) ?>
 			        </td>
-					<td>
-
-					</td>
-				</tr>
 		        <?php
 				$results = getTestCaseResult($lab_id, $num, $_SESSION['loggedInUser']);
 				// no results for test case
 				if ($results->num_rows < 1) {
 				?>
-					<tr class="warning">
-					<td></td>
-						<td></td>
-						<td></td>
-						<td class="result">
+					<td class="result warning">
 						    Not Run
 						</td>
-					</tr>
 				<?php
 					continue;
 				}
@@ -148,21 +139,10 @@ include_once("templates/page_head.php");
 					}
 
 				} ?>
-			     <?php
-				    if ($isPass) {
-						echo "<tr class='success'>";
-				    }
-				    else {
-				        echo "<tr class='danger'>";
-				    }
-				    ?>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td class="result">
-						    <?php echo ($isPass)? "Pass" : "Fail" ?>
-						</td>
-				    </tr>
+				    <td class="result <?php echo ($isPass) ? "success" : "danger" ?>">
+					    <?php echo ($isPass) ? "Pass" : "Fail" ?>
+				    </td>
+			    </tr>
 		    <?php } ?>
 	    </table>
     </content>
