@@ -88,9 +88,7 @@ include_once("templates/page_head.php");
 		    <div class="modal-dialog">
 			    <div class="modal-content">
 				    <div class="modal-body">
-					    <h3 id="test-progress-msg"></h3>
-
-					    <div class="progress">
+					    <div id="test-progress" class="progress">
 						    <div class="progress-bar progress-bar-striped active" role="progressbar" data-keyboard
 						         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
 							    Please Wait
@@ -178,13 +176,15 @@ include_once("templates/page_head.php");
 		    console.log('listening for updates');
 		    var source = new EventSource('run_tests.php');
 		    source.onmessage = function (event) {
-			    if (event.data == "waiting" || event.data == "run") {
-				    $("#TestProgressModal").modal({backdrop: "static"});
-			    }
-			    // result is ready
+			    console.log(event.data);
 			    if (event.data == "result ready") {
 				    // display results
 				    window.location.href = window.location.pathname + window.location.search;
+			    }
+
+			    else {
+				    $("#TestProgressModal").modal({backdrop: "static"});
+
 			    }
 		    }
 	    }
