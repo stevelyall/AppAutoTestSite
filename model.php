@@ -185,6 +185,7 @@ function addLab($name, $desc)
     if (!$result) {
 	    die("Adding lab failed" . mysqli_error($connection));
     }
+
     mysqli_close($connection);
 }
 
@@ -218,5 +219,37 @@ function modifyLab($name, $newname, $newdesc)
     }
     mysqli_close($connection);
 }
+
+function addTestCasesForLab($labName, $testCasesArray)
+{
+
+
+	$labId = getLabByName($labName)['id'];
+
+	$connection = connectToDb();
+	$labId = mysqli_real_escape_string($connection, $labId);
+
+	for ($i = 0; $i < count($testCasesArray); $i++) {
+		$testCaseNumber = $i + 1;
+		$testCaseName = $testCasesArray[$i][$testCaseNumber . 'name'];
+		$testCaseName = mysqli_real_escape_string($connection, $testCaseName);
+
+		$testCaseDescription = $testCasesArray[$i][($testCaseNumber . 'description')];
+		$testCaseDescription = mysqli_real_escape_string($connection, $testCaseDescription);
+
+		var_dump($testCaseName);
+		var_dump($testCaseDescription);
+
+		$query = "INSERT INTO testcase (lab_id, test_case_num, name, description) VALUES ('$labId', '$testCaseNumber', '$testCaseName', '$testCaseDescription');";
+		$result = mysqli_query($connection, $query);
+		if (!$result) {
+			die("Adding test case failed" . mysqli_error($connection));
+		}
+	}
+
+	mysqli_close($connection);
+
+}
+
 
 ?>

@@ -17,8 +17,15 @@ if (isset($_POST['submit'])) {
     if (getLabByName($name) != null) {
         $msg = "Can't add lab, {$name} already exists.";
     } else {
-        // add user
-        addLab($name, $description);
+	    // add lab
+	    $testCases = array();
+	    for ($i = 1; $i <= $_POST['numTestCases']; $i++) {
+		    array_push($testCases, array($i . 'name' => $_POST['testCase' . $i . 'Name'], $i . 'description' => $_POST['testCase' . $i . 'Description']));
+	    }
+	    // TODO remove debug
+	    var_dump($testCases);
+	    addLab($name, $description);
+	    addTestCasesForLab($name, $testCases);
         $msg = "{$name} added.";
     }
 } else {
@@ -45,7 +52,24 @@ include_once("templates/page_head.php");
             <label for="inputLabDesc" class="sr-only">Description</label>
             <!-- TODO textarea?-->
             <input type="text" name="inputLabDesc" class="form-control" placeholder="Description" required>
-            <br>
+
+
+	        <div id="test-case-selection" class="form-group">
+		        <br>
+		        <h5>Number of Test Cases</h5>
+		        <select class="form-control" name="numTestCases">
+			        <?php
+			        for ($i = 1; $i <= 5; $i++) {
+				        echo "<option value='" . $i . "''>" . $i . "</option>";
+			        } ?>
+		        </select>
+	        </div>
+
+	        <div id="test-cases">
+		        <!--			test case imputs are appended here-->
+	        </div>
+
+	        <br>
             <button id="done-adding-button" class="btn btn-primary" type="button" name="done">Done</button>
             <button class="btn btn-primary" type="submit" name="submit">Add Lab</button>
 
@@ -64,6 +88,28 @@ include_once("templates/page_head.php");
         console.log('load');
         $('#done-adding-button').click(function () {
             window.open('labs_manage.php', '_self');
-        })
+        });
+
+	    var numTestCases = $('select').val();
+	    numTestCasesChanged();
+
+	    $('select').on('change', function () {
+		    numTestCases = $('select').val();
+		    numTestCasesChanged();
+	    });
+
+	    function numTestCasesChanged() {
+		    $();
+		    $('#test-cases').empty();
+		    for (var i = 1; i <= numTestCases; i++) {
+			    var e = $('#test-cases');
+			    e.append("<br>");
+			    e.append("<h5> Test Case " + i + "</h5>");
+			    e.append("<input type='text' name='testCase" + i + "Name' class='form-control' placeholder='Name' required>");
+			    e.append("<textarea rows='2' name='testCase" + i + "Description' class='form-control' placeholder='Description' required>");
+
+		    }
+	    }
+
     })
 </script>

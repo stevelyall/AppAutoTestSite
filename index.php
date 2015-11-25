@@ -13,7 +13,6 @@ if (!isset($_SESSION['loggedInUser'])) {
 ob_flush();
 
 // get main page text
-// TODO on login or on every index page load?
 $_SESSION['courseName'] = getConfigProperty('course_name');
 $_SESSION['welcome_title'] = getConfigProperty('welcome_title');
 $_SESSION['welcome_message'] = getConfigProperty('welcome_message');

@@ -47,7 +47,6 @@ include_once("templates/page_head.php");
                    placeholder="Name"
                    autofocus>
             <label for="newLabDesc" class="sr-only">Description</label>
-            <!-- TODO textarea-->
             <textarea name="newLabDesc" class="form-control"> <?php echo $currentLab['description'] ?></textarea>
 
             <br>
