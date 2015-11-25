@@ -86,50 +86,83 @@ include_once("templates/page_head.php");
 
 	    ?>
 
-	    <?php
-	    $results = getResultsForLabAndUser($lab_id, $_SESSION['loggedInUser']);
-	    ?>
-
+	    <!-- todo for instructor show all users -->
 	    <!--	    TODO create result records-->
-	    <!--	    TODO manage test cases?-->
-
+	    <br>
+	    <h4>Test Cases</h4>
 	    <table id="results-table" class='table'>
+		    <tr>
+			    <th class="num">
+				    #
+			    </th>
+			    <th class="id">
+				    Name
+			    </th>
+			    <th class="description">
+				    Description
+			    </th>
+			    <th class="result">
+				    Result
+			    </th>
+		    </tr>
 		    <?php
-		    while ($row = mysqli_fetch_assoc($results)) {
-
-			    $testcase = getTestCaseDescriptionById($row['test_case_id']);
-			    $isPass = htmlentities($row['result']);
-			    // todo what should be shown for instructor?
-			    ?>
+		    $testCases = getTestCasesForLab($lab_id);
+		    while ($testCase = mysqli_fetch_assoc($testCases)) {
+			    $num = $testCase['test_case_num'];
+			?>
 			    <tr>
-				    <th class="id">
-					   Test Case Id
-				    </th>
-				    <th class="description">
-					    Description
-				    </th>
-				    <th class="result">
-					    Result
-				    </th>
-			    </tr>
-			    <?php
-			    if ($isPass) {
-					echo "<tr class='success'>";
-			    }
-			    else {
-			        echo "<tr class='danger'>";
-			    }
-			    ?>
-					<td class="id">
-					    <?php echo htmlentities($row['test_case_id']) ?>
+			        <td class=num"">
+				        <?php echo $num ?>
+				    </td>
+			        <td class="id">
+				        <?php echo htmlentities($testCase['name']) ?>
+			        </td>
+			        <td class="description">
+				        <?php echo htmlentities($testCase['description']) ?>
+			        </td>
+					<td>
+
 					</td>
-					<td class="description">
-					    <?php echo htmlentities($testcase['description']) ?>
-					</td>
-					<td class="result">
-					    <?php echo ($isPass)? "Pass" : "Fail" ?>
-					</td>
-			    </tr>
+				</tr>
+		        <?php
+				$results = getTestCaseResult($lab_id, $num, $_SESSION['loggedInUser']);
+				// no results for test case
+				if ($results->num_rows < 1) {
+				?>
+					<tr class="warning">
+					<td></td>
+						<td></td>
+						<td></td>
+						<td class="result">
+						    Not Run
+						</td>
+					</tr>
+				<?php
+					continue;
+				}
+
+				while ($result = mysqli_fetch_assoc($results)) {
+				    $isPass = false;
+					if ($result['result'] == 1) {
+						$isPass = true;
+					}
+
+				} ?>
+			     <?php
+				    if ($isPass) {
+						echo "<tr class='success'>";
+				    }
+				    else {
+				        echo "<tr class='danger'>";
+				    }
+				    ?>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="result">
+						    <?php echo ($isPass)? "Pass" : "Fail" ?>
+						</td>
+				    </tr>
 		    <?php } ?>
 	    </table>
     </content>

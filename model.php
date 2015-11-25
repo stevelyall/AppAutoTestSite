@@ -115,30 +115,21 @@ function getLabs()
 
 }
 
-// retrieves lab results for user
-function getResultsForLabAndUser($labid, $username)
-{
-	$connection = connectToDb();
-	$query = "SELECT * FROM result WHERE lab_id=$labid AND username = '$username'";
-	$results = mysqli_query($connection, $query);
-	return $results;
-}
-
 function getResultsForDownload()
 {
 	$connection = connectToDb();
-	$query = "SELECT lab.name, username, test_case_id, result FROM result JOIN lab ON result.lab_id = lab.id ORDER BY username";
+	$query = "SELECT lab.name, username, test_case_num, result FROM result JOIN lab ON result.lab_id = lab.id ORDER BY username";
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
 
-function getTestCaseDescriptionById($testcaseid)
-{
-	$connection = connectToDb();
-	$query = "SELECT description FROM testcase WHERE test_case_id=$testcaseid";
-	$results = mysqli_query($connection, $query);
-	return mysqli_fetch_assoc($results);
-}
+//function getTestCaseDescriptionById($testcaseid)
+//{
+//	$connection = connectToDb();
+//	$query = "SELECT description FROM testcase WHERE test_case_id=$testcaseid";
+//	$results = mysqli_query($connection, $query);
+//	return mysqli_fetch_assoc($results);
+//}
 
 function getLabByName($name)
 {
@@ -247,6 +238,27 @@ function addTestCasesForLab($labName, $testCasesArray)
 	mysqli_close($connection);
 
 }
+
+function getTestCasesForLab($labId)
+{
+	$connection = connectToDb();
+	$labId = mysqli_real_escape_string($connection, $labId);
+	$query = "SELECT test_case_num, name, description FROM testcase WHERE lab_id = '$labId'";
+	$result = mysqli_query($connection, $query);
+	if (!$result) {
+		echo "getting test cases failed";
+	}
+	return $result;
+}
+
+function getTestCaseResult($labid, $testCaseNumber, $username)
+{
+	$connection = connectToDb();
+	$query = "SELECT result FROM result WHERE lab_id='$labid' AND test_case_num = '$testCaseNumber' AND username = '$username'";
+	$results = mysqli_query($connection, $query);
+	return $results;
+}
+
 
 
 ?>
