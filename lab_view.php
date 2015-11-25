@@ -5,14 +5,12 @@ require_once("model.php");
 
 session_start();
 
-
 // must pass lab id
 if (!isset($_GET['id'])) {
 	redirectTo('index.php');
 }
 
 $lab_id = $_GET['id'];
-
 // was submitted for file upload
 if (isset($_POST['submit']) && $_POST['command'] == 'upload') {
 	require_once("file_upload.php");
@@ -83,8 +81,26 @@ include_once("templates/page_head.php");
 			    echo "<div class='alert alert-danger upload-result-alert' role='alert'>{$uploadMessage}</div>";
 		    }
 	    }
-
 	    ?>
+
+	    <!-- Test progress message -->
+	    <div id="TestProgressModal" class="modal fade" role="dialog">
+		    <div class="modal-dialog">
+			    <div class="modal-content">
+				    <div class="modal-body">
+					    <h3 id="test-progress-msg"></h3>
+
+					    <div class="progress">
+						    <div class="progress-bar progress-bar-striped active" role="progressbar" data-keyboard
+						         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+							    Please Wait
+						    </div>
+					    </div>
+
+				    </div>
+			    </div>
+		    </div>
+	    </div>
 
 	    <!-- todo for instructor show all users -->
 	    <!--	    TODO create result records-->
@@ -155,6 +171,28 @@ include_once("templates/page_head.php");
 <script>
     $(document).ready(function () {
 
-    })
+	    <?php
+		if (isset($uploadStatus) && $uploadWasSuccessful) { ?>
+
+	    if (typeof(EventSource) !== "undefined") {
+		    console.log('listening for updates');
+		    var source = new EventSource('run_tests.php');
+		    source.onmessage = function (event) {
+			    if (event.data == "waiting" || event.data == "run") {
+				    $("#TestProgressModal").modal({backdrop: "static"});
+			    }
+			    // result is ready
+			    if (event.data == "result ready") {
+				    // display results
+				    window.location.href = window.location.pathname + window.location.search;
+			    }
+		    }
+	    }
+	    else {
+		    alert("Your browser is not supported.");
+	    }
+	    <?php
+	    }?>
+    });
 
 </script>

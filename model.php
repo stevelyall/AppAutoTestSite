@@ -259,6 +259,23 @@ function getTestCaseResult($labid, $testCaseNumber, $username)
 	return $results;
 }
 
+function isFlagSet($flagName)
+{
+	$connection = connectToDb();
+	$query = "SELECT value FROM flags WHERE name='$flagName'";
+	$results = mysqli_query($connection, $query);
+	return mysqli_fetch_assoc($results)['value'];
+}
 
+function clearFlag($flagName)
+{
+	$connection = connectToDb();
+	$query = "UPDATE flags SET value = 0 where name = '$flagName';";
+	$result = mysqli_query($connection, $query);
+	if (!$result) {
+		die("Updating flags failed" . mysqli_error($connection));
+	}
+	mysqli_close($connection);
+}
 
 ?>
