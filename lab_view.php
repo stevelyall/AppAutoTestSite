@@ -5,6 +5,11 @@ require_once("model.php");
 
 session_start();
 
+//only accessible if logged in
+if (!isset($_SESSION['loggedInUser'])) {
+	redirectTo("index.php");
+}
+
 // must pass lab id
 if (!isset($_GET['id'])) {
 	redirectTo('index.php');
@@ -18,7 +23,6 @@ if (isset($_POST['submit']) && $_POST['command'] == 'upload') {
 	$uploadWasSuccessful = $uploadStatus['success'];
 	$uploadMessage = $uploadStatus['message'];
 }
-
 
 $currentLab = getLabById($lab_id);
 

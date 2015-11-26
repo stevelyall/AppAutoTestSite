@@ -2,6 +2,11 @@
 header("Content-Type: text/event-stream");
 header("Cache-Control: no-cache");
 
+//only accessible if logged in
+if (!isset($_SESSION['loggedInUser'])) {
+	redirectTo("index.php");
+}
+
 require_once("model.php");
 
 if (isFlagSet('script_running')) {
