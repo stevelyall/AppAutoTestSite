@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     $username = $_POST['inputUsername'];
 	$firstname = $_POST['inputFirstName'];
 	$lastname = $_POST['inputLastName'];
-    $password = $_POST['inputPassword'];
+	$password = sha1($_POST['inputPassword']);
 
     // check for duplicate user
     // user with that name exists

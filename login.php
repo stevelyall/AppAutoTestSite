@@ -6,7 +6,7 @@ require_once("model.php");
 if (isset($_POST['submit'])) {
 
     $username = $_POST['inputUsername'];
-    $passwordEntered = $_POST['inputPassword'];
+	$passwordEntered = sha1($_POST['inputPassword']);
 
     // find user in db
     $found_user = findUser($username);
