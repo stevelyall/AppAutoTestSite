@@ -18,9 +18,9 @@ if ($username == 'admin') {
 if (isset($_POST['submit'])) {
     // form was submitted
     $username = $_POST['user'];
-    $newpassword = $_POST['inputPassword'];
+	$newpassword = sha1($_POST['inputPassword']);
     modifyUser($username, $newpassword);
-    redirectTo("manage_accounts.php");
+	redirectTo("accounts_manage.php");
 }
 
 ob_flush();
