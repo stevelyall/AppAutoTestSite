@@ -19,6 +19,7 @@ function getConfigProperty($property)
 function setConfigProperty($property, $value)
 {
     $connection = connectToDb();
+	$value = htmlspecialchars($value);
     $query = "UPDATE config SET value = '$value' where property = '$property';";
     $result = mysqli_query($connection, $query);
     if (!$result) {

@@ -51,9 +51,8 @@ include_once("templates/page_head.php");
                 </div>
                 <div class="form-group">
                     <label for="welcomeText">Welcome Message</label>
-                    <textarea id="welcomeText" name="welcome_message" rows="4" class="form-control">
-                        <?php echo getConfigProperty('welcome_message'); ?>
-                    </textarea>
+	                <textarea id="welcomeText" name="welcome_message" rows="4"
+	                          class="form-control"><?php echo getConfigProperty('welcome_message'); ?></textarea>
                 </div>
                 <button class="btn btn-primary" type="submit" name="submit">Submit Changes</button>
             </form>
