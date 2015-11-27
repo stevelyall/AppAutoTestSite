@@ -6,7 +6,7 @@ function redirectTo($page)
     header("Location: " . $page);
 }
 
-require_once('database.php');
+require_once('database_connection.php');
 
 function getConfigProperty($property)
 {
@@ -123,14 +123,6 @@ function getResultsForDownload()
 	$results = mysqli_query($connection, $query);
 	return $results;
 }
-
-//function getTestCaseDescriptionById($testcaseid)
-//{
-//	$connection = connectToDb();
-//	$query = "SELECT description FROM testcase WHERE test_case_id=$testcaseid";
-//	$results = mysqli_query($connection, $query);
-//	return mysqli_fetch_assoc($results);
-//}
 
 function getLabByName($name)
 {

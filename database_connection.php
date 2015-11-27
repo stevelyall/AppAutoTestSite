@@ -3,12 +3,18 @@
 //returns a database connection
 function connectToDb()
 {
-	// development
 	$host = "127.0.0.1";
-	$user = "root";
-	$pass = "";
+	$user = "appautotest";
+	$pass = "mobileappstru";
 	$dbname = "appautotest";
 	$port = "3306";
+
+	// development
+//	$host = "127.0.0.1";
+//	$user = "root";
+//	$pass = "";
+//	$dbname = "appautotest";
+//	$port = "3306";
 
 	// connect to the database
 	$connection = mysqli_connect($host, $user, $pass, $dbname, $port);
