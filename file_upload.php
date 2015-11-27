@@ -1,22 +1,21 @@
 <?php
-
+/**
+ * Handles upload of a source file for lab submission.
+ * Renames uploaded file for handling by test script.
+ * @param $file file to be uploaded
+ * @param $lab_id id number of lab for submission
+ * @param $username name of user
+ * @return array
+ */
 function uploadFile($file, $lab_id, $username)
 {
 	// get file upload location
 	require_once("model.php");
 	$target_dir = getConfigProperty('upload_directory');
 
-	// process file upload
-	$fileType = pathinfo($file, PATHINFO_EXTENSION);
-	if ($fileType != "java") {
-		return array('success' => false, 'message' => 'Not a Java File');
-	}
-
 	// rename uploaded file with username and lab id
 	$file = $username . "_" . $lab_id . "." . $fileType;
 	$target_file = $target_dir . $file;
-
-	//echo $target_file;
 
 	//if file already exists
 	if (file_exists($target_file)) {

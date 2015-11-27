@@ -58,7 +58,7 @@ include_once("templates/page_head.php");
                         <h4 class="modal-title">Upload File</h4>
                     </div>
                     <div class="modal-body">
-	                    <b>Select a Java file to upload:</b>
+	                    <b>Select a file to upload:</b>
 
 	                    <form action="lab_view.php?id=<?php echo $lab_id ?>" method="post"
 	                          enctype="multipart/form-data">
