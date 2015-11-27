@@ -18,9 +18,18 @@ if ($username == 'admin') {
 if (isset($_POST['submit'])) {
     // form was submitted
     $username = $_POST['user'];
-	$newpassword = sha1($_POST['inputPassword']);
-    modifyUser($username, $newpassword);
-	redirectTo("accounts_manage.php");
+	$currentpassword = sha1($_POST['inputCurrentPassword']);
+
+	$user = findUser($_SESSION['loggedInUser']);
+	$passwordsMatch = ($currentpassword == $user['password']) ? true : false;
+	if (!$passwordsMatch) {
+		$msg = "Your current password was entered incorrectly. " . $username . "'s password was not changed.";
+
+	} else {
+		$newpassword = sha1($_POST['inputPassword']);
+		modifyUser($username, $newpassword);
+		redirectTo("accounts_manage.php");
+	}
 }
 
 ob_flush();
@@ -33,14 +42,21 @@ include_once("templates/page_head.php");
     ?>
 
     <content>
-        <!-- add user form -->
         <form class="account-form form-signin" action="account_change_password.php" method="post">
             <h2 class="form-signin-heading"> Change <?php echo $username; ?>'s Password </h2>
-            <!-- also post current user name for new page to access -->
+
+	        <?php if (isset($msg)) {
+		        echo "<div class='alert alert-danger upload-result-alert' role='alert'>{$msg}</div>";
+	        } ?>
+
             <input type="hidden" name="user" value="<?php echo $username; ?>">
+	        <label for="inputCurrentPassword" class="sr-only">Current Password</label>
+	        <input type="password" name="inputCurrentPassword" class="form-control" placeholder="Your Current Password"
+	               required
+	               autofocus>
             <label for="inputPassword" class="sr-only">New Password</label>
-            <input type="password" name="inputPassword" class="form-control" placeholder="New Password" required
-                   autofocus>
+	        <input type="password" name="inputPassword" class="form-control"
+	               placeholder="New Password for <?php echo $username ?>" required>
             <br>
             <button id="change-password-back-button" class="btn btn-primary" type="button" name="done">Back</button>
             <button class="btn btn-primary" type="submit" name="submit">Submit Changes</button>
