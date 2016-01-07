@@ -23,7 +23,7 @@ if (isFlagSet('script_running')) {
 function runTests()
 {
 	$script = getConfigProperty('script_location');
-	$result = exec($script);
+	$result = exec($script + '1');
 	echo "data: started" . $result . "\n"; // TODO don't send script output to client
 }
 
