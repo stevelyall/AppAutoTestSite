@@ -9,22 +9,25 @@ if (!isset($_SESSION['loggedInUser']) || $_SESSION['isInstructor'] != '1') {
     redirectTo("index.php");
 }
 
-// must pass lab id
-if (!isset($_GET['id'])) {
+if (isset($_POST['submit'])) {
+	// form was submitted
+	$id = $_POST['id'];
+	$newid = $_POST['newLabId'];
+	$newdesc = $_POST['newLabDesc'];
+
+	modifyLab($id, $newid, $newdesc);
+	redirectTo("labs_manage.php");
+}
+else if (!isset($_GET['id'])) {
+	// must pass lab id to modify
     redirectTo('index.php');
 }
 
 $id = $_GET['id'];
 
 $currentLab = getLabById($id);
-if (isset($_POST['submit'])) {
-    // form was submitted
-    $name = $_POST['name'];
-    $newname = $_POST['newLabName'];
-    $newdesc = $_POST['newLabDesc'];
-    modifyLab($name, $newname, $newdesc);
-    redirectTo("labs_manage.php");
-}
+
+
 
 ob_flush();
 
@@ -39,12 +42,12 @@ include_once("templates/page_head.php");
     <content>
         <!-- edit lab form -->
         <form class="account-form form-signin" action="lab_edit.php" method="post">
-            <h2 class="form-signin-heading"> Edit Lab <?php echo $currentLab['name']; ?> </h2>
+            <h2 class="form-signin-heading"> Edit Lab <?php echo $currentLab['id']; ?> </h2>
             <!-- also post current name for new page to access -->
-            <input type="hidden" name="name" value="<?php echo $currentLab['name']; ?>">
-            <label for="newLabName" class="sr-only">Name</label>
-            <input type="text" name="newLabName" class="form-control" value="<?php echo $currentLab['name']; ?>"
-                   placeholder="Name"
+            <input type="hidden" name="id" value="<?php echo $currentLab['id']; ?>">
+            <label for="newLabId" class="sr-only">Name</label>
+            <input type="number" name="newLabId" class="form-control" value="<?php echo $currentLab['id']; ?>"
+                   placeholder="Lab Number"
                    autofocus>
             <label for="newLabDesc" class="sr-only">Description</label>
             <textarea name="newLabDesc" class="form-control"> <?php echo $currentLab['description'] ?></textarea>

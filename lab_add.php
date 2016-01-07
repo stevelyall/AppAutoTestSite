@@ -10,21 +10,21 @@ if (!isset($_SESSION['loggedInUser']) || $_SESSION['isInstructor'] != '1') {
 
 if (isset($_POST['submit'])) {
     // form was submitted
-    $name = $_POST['inputLabName'];
+    $id = $_POST['inputLabId'];
     $description = $_POST['inputLabDesc'];
     // check for duplicate lab
 	// lab with that name exists
-    if (getLabByName($name) != null) {
-        $msg = "Can't add lab, {$name} already exists.";
+    if (getLabById($id) != null) {
+        $msg = "Can't add Lab {$id}, already exists.";
     } else {
 	    // add lab
 	    $testCases = array();
 	    for ($i = 1; $i <= $_POST['numTestCases']; $i++) {
 		    array_push($testCases, array($i . 'name' => $_POST['testCase' . $i . 'Name'], $i . 'description' => $_POST['testCase' . $i . 'Description']));
 	    }
-	    addLab($name, $description);
-	    addTestCasesForLab($name, $testCases);
-        $msg = "{$name} added.";
+	    addLab($id, $description);
+	    addTestCasesForLab($id, $testCases);
+        $msg = "Lab {$id} added.";
     }
 } else {
     // form was not submitted (GET request)
@@ -45,8 +45,8 @@ include_once("templates/page_head.php");
         <!-- add lab form -->
         <form class="account-form form-signin" action="lab_add.php" method="post">
             <h2 class="form-signin-heading"> <?php echo $msg; ?> </h2>
-            <label for="inputLabName" class="sr-only">Username</label>
-            <input type="text" name="inputLabName" class="form-control" placeholder="Lab Name" required autofocus>
+            <label for="inputLabId" class="sr-only">Username</label>
+            <input type="number" name="inputLabId" class="form-control" placeholder="Lab Number" required autofocus>
             <label for="inputLabDesc" class="sr-only">Description</label>
             <!-- TODO textarea?-->
             <input type="text" name="inputLabDesc" class="form-control" placeholder="Description" required>

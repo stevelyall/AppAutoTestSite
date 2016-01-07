@@ -50,7 +50,7 @@ if (isset($_SESSION['loggedInUser'])) {
                                 while ($row = mysqli_fetch_assoc($labs)) {
                                     ?>
                                     <li>
-                                        <a href='lab_view.php?id=<?php echo htmlentities($row['id']) ?>'><?php echo $row['name'] ?></a>
+                                        <a href='lab_view.php?id=<?php echo htmlentities($row['id']) ?>'><?php echo "Lab " . $row['id'] ?></a>
                                     </li>
                                     <?php
                                 }

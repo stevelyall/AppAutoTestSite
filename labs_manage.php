@@ -43,7 +43,7 @@ include_once("templates/page_head.php");
                     ?>
                     <tr>
                         <th>
-                            <a href="lab_view.php?id=<?php echo htmlentities($row['id']) ?>"><?php echo htmlentities($row['name']) ?></a>
+                            <a href="lab_view.php?id=<?php echo htmlentities($row['id']) ?>"><?php echo "Lab " . htmlentities($row['id']) ?></a>
                         </th>
                         <td>
                             <!--                            TODO confirm deletion?-->

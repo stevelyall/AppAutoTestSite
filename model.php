@@ -178,7 +178,7 @@ function modifyLab($id, $newid, $newdesc)
     $newid = mysqli_real_escape_string($connection, $newid);
     $newdesc = mysqli_real_escape_string($connection, $newdesc);
 
-    $query = "UPDATE lab SET id = '$newid', description = '$newdesc' WHERE name = '$id' LIMIT 1;";
+    $query = "UPDATE lab SET id = '$newid', description = '$newdesc' WHERE id = '$id' LIMIT 1;";
     var_dump($query);
     $result = mysqli_query($connection, $query);
 

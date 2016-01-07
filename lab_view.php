@@ -39,7 +39,7 @@ include_once("templates/page_head.php");
     <content>
 
 
-	    <h1><?php echo $currentLab['name'] ?></h1>
+	    <h1><?php echo "Lab " . $currentLab['id'] ?></h1>
 
 	    <p><?php echo $currentLab['description'] ?>
 
