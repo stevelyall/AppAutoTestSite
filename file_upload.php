@@ -14,7 +14,7 @@ function uploadFile($file, $lab_id, $username)
 	$target_dir = getConfigProperty('upload_directory');
 
 	// rename uploaded file with username and lab id
-	$file = $username . "_" . $lab_id . "." . $fileType;
+	$file = $username . "_" . $lab_id . "." . pathinfo($_FILES["fileToUpload"]["name"])['extension'];
 	$target_file = $target_dir . $file;
 
 	//if file already exists
