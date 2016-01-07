@@ -119,25 +119,9 @@ function getLabs()
 function getResultsForDownload()
 {
 	$connection = connectToDb();
-	$query = "SELECT lab.name, username, test_case_num, result FROM result JOIN lab ON result.lab_id = lab.id ORDER BY username";
+	$query = "SELECT lab.id, username, test_case_num, result FROM result JOIN lab ON result.lab_id = lab.id ORDER BY username";
 	$results = mysqli_query($connection, $query);
 	return $results;
-}
-
-function getLabByName($name)
-{
-    $connection = connectToDb();
-    $name = mysqli_real_escape_string($connection, $name);
-    $query = "SELECT * FROM lab WHERE name = '$name' LIMIT 1";
-    $result = mysqli_query($connection, $query);
-    if (!$result) {
-        echo "findLab {$name} failed";
-    }
-    if ($lab = mysqli_fetch_assoc($result)) {
-        return $lab;
-    } else {
-        return null;
-    }
 }
 
 function getLabById($id)
@@ -147,7 +131,7 @@ function getLabById($id)
     $query = "SELECT * FROM lab WHERE id = '$id' LIMIT 1";
     $result = mysqli_query($connection, $query);
     if (!$result) {
-        echo "findLab {$id} failed";
+        echo "find Lab {$id} failed";
     }
     if ($lab = mysqli_fetch_assoc($result)) {
         return $lab;
@@ -158,13 +142,13 @@ function getLabById($id)
 
 
 
-function addLab($name, $desc)
+function addLab($id, $desc)
 {
     $connection = connectToDb();
-    $name = mysqli_real_escape_string($connection, $name);
+    $id = mysqli_real_escape_string($connection, $id);
 	$desc = mysqli_real_escape_string($connection, $desc);
-    $query = "INSERT INTO lab (name, description)
-                VALUES ('$name', '$desc'); ";
+    $query = "INSERT INTO lab (id, description)
+                VALUES ('$id', '$desc'); ";
 	$result = mysqli_query($connection, $query);
     if (!$result) {
 	    die("Adding lab failed" . mysqli_error($connection));
@@ -181,20 +165,20 @@ function deleteLab($id)
 	$query = "DELETE FROM lab WHERE id = '$id';";
     $result = mysqli_query($connection, $query);
     if (!$result) {
-        die("Deleting lab failed" . mysqli_error($connection));
+        die("Deleting lab " . $id . " failed" . mysqli_error($connection));
     }
 
     mysqli_close($connection);
 }
 
-function modifyLab($name, $newname, $newdesc)
+function modifyLab($id, $newid, $newdesc)
 {
     $connection = connectToDb();
-    $name = mysqli_real_escape_string($connection, $name);
-    $newname = mysqli_real_escape_string($connection, $newname);
+    $id = mysqli_real_escape_string($connection, $id);
+    $newid = mysqli_real_escape_string($connection, $newid);
     $newdesc = mysqli_real_escape_string($connection, $newdesc);
 
-    $query = "UPDATE lab SET name = '$newname', description = '$newdesc' WHERE name = '$name' LIMIT 1;";
+    $query = "UPDATE lab SET id = '$newid', description = '$newdesc' WHERE name = '$id' LIMIT 1;";
     var_dump($query);
     $result = mysqli_query($connection, $query);
 
@@ -204,11 +188,8 @@ function modifyLab($name, $newname, $newdesc)
     mysqli_close($connection);
 }
 
-function addTestCasesForLab($labName, $testCasesArray)
+function addTestCasesForLab($labId, $testCasesArray)
 {
-
-
-	$labId = getLabByName($labName)['id'];
 
 	$connection = connectToDb();
 	$labId = mysqli_real_escape_string($connection, $labId);
