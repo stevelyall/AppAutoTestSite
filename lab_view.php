@@ -104,65 +104,24 @@ include_once("templates/page_head.php");
 		    </div>
 	    </div>
 
-	    <!-- todo for instructor show all users -->
-	    <!--	    TODO create result records-->
 	    <br>
-	    <h4>Test Cases</h4>
-	    <table id="results-table" class='table'>
-		    <tr>
-			    <th class="num">
-				    #
-			    </th>
-			    <th class="id">
-				    Name
-			    </th>
-			    <th class="description">
-				    Description
-			    </th>
-			    <th class="result">
-				    Result
-			    </th>
-		    </tr>
+	    <h4>Test Case Results</h4>
+	    <p>
 		    <?php
-		    $testCases = getTestCasesForLab($lab_id);
-		    while ($testCase = mysqli_fetch_assoc($testCases)) {
-			    $num = $testCase['test_case_num'];
-			?>
-			    <tr>
-				    <td class="num">
-				        <?php echo $num ?>
-				    </td>
-			        <td class="id">
-				        <?php echo htmlentities($testCase['name']) ?>
-			        </td>
-			        <td class="description">
-				        <?php echo htmlentities($testCase['description']) ?>
-			        </td>
-		        <?php
-				$results = getTestCaseResult($lab_id, $num, $_SESSION['loggedInUser']);
-				// no results for test case
-				if ($results->num_rows < 1) {
-				?>
-					<td class="result warning">
-						    Not Run
-						</td>
-				<?php
-					continue;
-				}
+		    /**
+		     * check for a file with results for that lab and user, display file contents
+		     */
+		    require_once('TestResult.php');
+		    $results = new TestResult($_SESSION['loggedInUser'], $lab_id);
 
-				while ($result = mysqli_fetch_assoc($results)) {
-				    $isPass = false;
-					if ($result['result'] == 1) {
-						$isPass = true;
-					}
+		    $results = explode("\n", $results->GetResultsFromFile());
+		    for ($i = 0; $i < count($results); $i++) {
+			    echo $results[$i] . "<br>";
+		    }
+		    1
 
-				} ?>
-				    <td class="result <?php echo ($isPass) ? "success" : "danger" ?>">
-					    <?php echo ($isPass) ? "Pass" : "Fail" ?>
-				    </td>
-			    </tr>
-		    <?php } ?>
-	    </table>
+		    ?>
+	    </p>
     </content>
 
 </div>
