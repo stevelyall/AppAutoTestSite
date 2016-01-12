@@ -29,7 +29,6 @@ function uploadFile($file, $lab_id, $username)
 	}
 
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		sleep(1);
 		$result = runTests($target_file); // run tests for that filename
 		return array('success' => true, 'message' => "The file has been uploaded successfully.", 'scriptResult' => $result);
 	} else {
@@ -39,6 +38,7 @@ function uploadFile($file, $lab_id, $username)
 
 function runTests($filename)
 {
+	sleep(2);
 	$script = getConfigProperty('script_location');
 	$result = exec($script . ' ' . $filename);
 	return $result;
