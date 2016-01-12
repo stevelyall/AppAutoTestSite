@@ -23,7 +23,6 @@ if (isset($_POST['submit']) && $_POST['command'] == 'upload') {
 	$uploadWasSuccessful = $uploadStatus['success'];
 	$uploadMessage = $uploadStatus['message'];
 	$scriptResult = $uploadStatus['scriptResult'];
-	echo "<script>console.log({$scriptResult});</script>";
 }
 
 $currentLab = getLabById($lab_id);
@@ -83,6 +82,7 @@ include_once("templates/page_head.php");
 	    if (isset($uploadStatus)) {
 		    if ($uploadWasSuccessful) {
 			    echo "<div class='alert alert-success upload-result-alert' role='alert'>{$uploadMessage}</div>";
+			    echo "<script>console.log({$scriptResult});</script>";
 		    } else {
 			    echo "<div class='alert alert-danger upload-result-alert' role='alert'>{$uploadMessage}</div>";
 		    }
