@@ -19,7 +19,7 @@ function uploadFile($file, $lab_id, $username)
 
 	//if file already exists
 	if (file_exists($target_file)) {
-		return array('success' => false, 'message' => 'File already exists');
+		unlink($target_file);
 	}
 
 	// Check file size
