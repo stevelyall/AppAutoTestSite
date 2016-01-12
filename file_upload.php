@@ -29,8 +29,8 @@ function uploadFile($file, $lab_id, $username)
 	}
 
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		runTests($target_file); // run tests for that filename
-		return array('success' => true, 'message' => "The file has been uploaded successfully.");
+		$result = runTests($target_file); // run tests for that filename
+		return array('success' => true, 'message' => "The file has been uploaded successfully.", 'scriptResult' => $result);
 	} else {
 		return array('success' => false, 'message' => "Sorry, there was an error uploading your file.");
 	}
@@ -40,7 +40,7 @@ function runTests($filename)
 {
 	$script = getConfigProperty('script_location');
 	$result = exec($script . ' ' . $filename);
-	echo "<script>console.log($result);</script>";
+	return $result;
 	//echo "data: started" . $result . "\n";
 	// TODO fix SSE
 }

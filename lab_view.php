@@ -22,6 +22,8 @@ if (isset($_POST['submit']) && $_POST['command'] == 'upload') {
 	$uploadStatus = uploadFile(basename($_FILES["fileToUpload"]["name"]), $lab_id, $_SESSION['loggedInUser']);
 	$uploadWasSuccessful = $uploadStatus['success'];
 	$uploadMessage = $uploadStatus['message'];
+	$scriptResult = $uploadStatus['scriptResult'];
+	echo "<script>console.log({$scriptResult});</script>";
 }
 
 $currentLab = getLabById($lab_id);
