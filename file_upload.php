@@ -38,11 +38,9 @@ function uploadFile($file, $lab_id, $username)
 
 function runTests($filename)
 {
-	sleep(2);
+	sleep(1);
 	$script = getConfigProperty('script_location');
 	$result = exec($script . ' ' . $filename);
 	return $result;
-	//echo "data: started" . $result . "\n";
-	// TODO fix SSE
 }
 ?>
