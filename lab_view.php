@@ -138,7 +138,7 @@ include_once("templates/page_head.php");
 		if (isset($uploadStatus) && $uploadWasSuccessful) { ?>
 
 	    if (typeof(EventSource) !== "undefined") {
-		    console.log('listening for updates');
+		    //console.log('listening for updates');
 		    var source = new EventSource('run_tests.php');
 		    source.onmessage = function (event) {
 			    console.log(event.data);
