@@ -40,7 +40,7 @@ function runTests($filename)
 {
 	$script = getConfigProperty('script_location');
 	$result = exec($script . ' ' . $filename);
-	echo "<script>alert($result)</script>";
+	echo "<script>console.log($result);</script>";
 	//echo "data: started" . $result . "\n";
 	// TODO fix SSE
 }
